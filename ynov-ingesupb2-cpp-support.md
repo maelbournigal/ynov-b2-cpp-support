@@ -223,7 +223,11 @@ int main()
   
   test::createAndCallHelloer();
   cout << newline;
-  test::createAndCallHelloer("Yo");
+  
+  string mess = "Yo";
+  string* messPtr = &mess;
+  
+  test::createAndCallHelloer(*messPtr);
   
   return 0;
 }
@@ -245,6 +249,7 @@ clang++ -std=c++11 -stdlib=libc++ example.cpp -o example_program
 
 #### Variables et types 
 
+
 ```c++
 boolean a;
 float mynumber;
@@ -253,7 +258,9 @@ int x = 0;
 int y (0);
 ```
 
+
 #### Constantes et Preprocesseurs 
+
 
 ```c++
 const double pi = 3.14159;
@@ -264,6 +271,7 @@ const char newline = '\n';
 #define PI 3.14159
 #define NEWLINE '\n'
 ```
+
 
 #### Operateurs 
 
@@ -277,6 +285,7 @@ const char newline = '\n';
 - Operateurs de bit ( &, |, ^, ~, <<, >> )
 
 #### Input / Output 
+
 
 ```c++
 // i/o example
@@ -295,11 +304,13 @@ int main ()
 }
 ```
 
+
 #### Gestion de flux
 
 - switch (case, break, default) : *Attention* Seulement constantes 
 - boucles (for, while, do... while)
 - (Bonus) goto : https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf
+
 
 ```c++
 // range-based for loop
@@ -318,6 +329,7 @@ int main ()
 }
 ```
 
+
 #### Functions 
 
 - Déclaration et implementation 
@@ -328,6 +340,7 @@ int main ()
 - Recursivité : capacité de la fonction de faire appel à elle même 
 - Overloading : déclaration multiple 
 - templates 
+
 
 ```c++
 // overloading functions
@@ -354,6 +367,7 @@ int main ()
 }
 ```
 
+
 ```c++
 // function template
 #include <iostream>
@@ -378,16 +392,171 @@ int main () {
 }
 ```
 
+
 #### Scope 
 
 - Blocks
 - Namespaces 
 
 
+#### Tableaux 
 
+- Initialization :  
+  - Déclaration de la taille obligatoire 
+  - La taille doit être connue lors de compilation
+  - `int foo [5];`  
+  - `int bar [5] = { 10, 20, 30 };`  
+  - `int foo [] = { 16, 2, 77, 40, 12071 };`  
+- Accès aux valeurs  
+  - `foo[2] = 10` (vs `int foo[2]`);  
+- Dimensions multiples  
+  - `char century [100][365][24][60][60];`  
+- Librarie arrays  
+  - `#include <array>`  
 
+#### Pointeurs 
+
+- Adresse (memoire) : `foo = &myvar;`
+```c++
+myvar = 25;
+foo = &myvar;
+bar = myvar;
+```
+
+- Accès à valeur 
+```c++
+myvar == 25
+&myvar == 1776
+foo == 1776
+*foo == 25
+```
+
+- Initialization 
+```c++
+int myvar;
+int * myptr = &myvar;
+```
+
+- Opérations
+```c++
+const char * foo = "hello";
+*(foo+4); // Quel valeur ?
+foo[4];  // Quel valeur ?
+```
+
+- Void pointer
+```c++
+// increaser
+#include <iostream>
+using namespace std;
+
+void increase (void* data, int psize)
+{
+  if ( psize == sizeof(char) )
+  { char* pchar; pchar=(char*)data; ++(*pchar); }
+  else if (psize == sizeof(int) )
+  { int* pint; pint=(int*)data; ++(*pint); }
+}
+
+int main ()
+{
+  char a = 'x';
+  int b = 1602;
+  increase (&a,sizeof(a));
+  increase (&b,sizeof(b));
+  cout << a << ", " << b << '\n';
+  return 0;
+}
+```
+
+#### Structures 
+
+- Groupment des attributs 
+
+```c++
+struct type_name {
+member_type1 member_name1;
+member_type2 member_name2;
+member_type3 member_name3;
+.
+.
+} object_names;
+```
+
+- Pointeurs vers les structures : `pmovie->title` == `(*pmovie).title`
+
+```c++
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+
+struct movies_t {
+  string title;
+  int year;
+};
+
+int main ()
+{
+  string mystr;
+
+  movies_t amovie;
+  movies_t * pmovie;
+  pmovie = &amovie;
+
+  cout << "Enter title: ";
+  getline (cin, pmovie->title);
+  cout << "Enter year: ";
+  getline (cin, mystr);
+  (stringstream) mystr >> pmovie->year;
+
+  cout << "\nYou have entered:\n";
+  cout << pmovie->title;
+  cout << " (" << pmovie->year << ")\n";
+
+  return 0;
+}
+```
+
+#### Alias de types 
+
+- typedef
+```c++
+typedef char C;
+typedef unsigned int WORD;
+typedef char * pChar;
+typedef char field [50];
+```
+
+```c++
+using C = char;
+using WORD = unsigned int;
+using pChar = char *;
+using field = char [50]; 
+```
+
+- Unions : a ne pas confondre avec les struct
+
+```c++
+union mytypes_t {
+  char c;
+  int i;
+  float f;
+} mytypes;
+```
+
+- Enum
+```c++
+enum colors_t {black, blue, green, cyan, red, purple, yellow, white};
+```
+
+```c++
+enum class Colors {black, blue, green, cyan, red, purple, yellow, white};
+```
 
 ### Travaux pratiques : C++
+
+- https://www.hackerrank.com/domains/cpp
 
 ### Travaux pratiques : CMake
 
