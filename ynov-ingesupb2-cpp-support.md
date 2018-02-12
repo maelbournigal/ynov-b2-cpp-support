@@ -554,9 +554,20 @@ enum colors_t {black, blue, green, cyan, red, purple, yellow, white};
 enum class Colors {black, blue, green, cyan, red, purple, yellow, white};
 ```
 
+
+
+
+
 ### Travaux pratiques : C++
 
 - https://www.hackerrank.com/domains/cpp
+
+- https://www.hackerrank.com/challenges/c-tutorial-functions/problem
+- https://www.hackerrank.com/challenges/c-tutorial-basic-data-types/problem
+- https://www.hackerrank.com/challenges/c-tutorial-strings/problem
+- https://www.hackerrank.com/challenges/c-tutorial-conditional-if-else/problem
+- https://www.hackerrank.com/challenges/c-tutorial-class/problem
+
 
 ### Travaux pratiques : CMake
 
