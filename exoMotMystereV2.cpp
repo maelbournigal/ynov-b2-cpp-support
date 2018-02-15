@@ -1,8 +1,7 @@
 //
-// Created by maelb on 14/02/2018.
+// Created by maelb on 13/02/2018.
 //
-
-#include "exoMotMystereV2.h"
+//
 #include <iostream>
 #include <ctime>
 #include <iostream>
@@ -17,7 +16,7 @@ int main(){
     srand(time(0));
     bool continuer = 0;
     string reponseContinuer = "non";
-    string const monFichier ="../dictionnaire.txt" ;
+    string const monFichier ="D:\\cours\\c_c++\\ynov-b2-cpp-support\\dictionnaire.txt" ;
     do {
         fstream monFlux(monFichier.c_str());
         string mots;
@@ -62,6 +61,8 @@ int main(){
             }
             //cout<<motsMelange<<endl;
             dictionnaire.clear();
+            //suppression d'un caractere vide
+            motsUtilisateur.pop_back();
             do {
                 cout << "Quel est ce mot: " << motsMelange << endl;
                 cin >> reponse;
@@ -79,8 +80,6 @@ int main(){
                     test2 = reponse[i];
                     valeurAscii2[i] = test2;
                 }
-                //suppression d'un caractere vide
-                motsUtilisateur.pop_back();
 
                 //boucle pour verifier le resultat
                 int a(0);
@@ -88,10 +87,8 @@ int main(){
                     int i = 0;
                     while (i < reponse.length()){
                         if (valeurAscii[i] != valeurAscii2[i]){
-                            cout<<"test"<<endl;
                             a*=0;
                         } else{
-                            cout<<"victoire"<<endl;
                             a+=1;
                         }
                         i++;
